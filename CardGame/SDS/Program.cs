@@ -59,7 +59,7 @@ namespace SDS
                 //커서를 생성
                 MovingCursor(11, 19, 11, 54, 0, 0, 14, true, '▼');
 
-                Thread.Sleep(500);
+                Thread.Sleep(500);//애니매이션 타임
 
             }
         }
@@ -103,7 +103,8 @@ namespace SDS
                             break;
 
                         case ConsoleKey.Enter:
-
+                            SetCursorPosition(x, y);
+                            Write("  ");
                             break;
                     }
                 }
@@ -138,26 +139,6 @@ namespace SDS
                         case ConsoleKey.Enter:
                             SetCursorPosition(x, y);
                             Write("  ");
-                            if (x == 11)
-                            {
-
-                            }
-                            else if (x == 25)
-                            {
-
-                            }
-                            else if (x == 39)
-                            {
-
-                            }
-                            else if (x == 53)
-                            {
-
-                            }
-                            else if (x == 67)
-                            {
-
-                            }
                             return;
                     }
                 }
