@@ -5,3 +5,10 @@ C:\우윤식\SDS\CardGame\SDS\obj\Debug\SDS.csproj.AssemblyReference.cache
 C:\우윤식\SDS\CardGame\SDS\obj\Debug\SDS.csproj.CoreCompileInputs.cache
 C:\우윤식\SDS\CardGame\SDS\obj\Debug\SDS.exe
 C:\우윤식\SDS\CardGame\SDS\obj\Debug\SDS.pdb
+C:\C#(Visual Studid)\C#(GitHub)\SDS\CardGame\SDS\bin\Debug\SDS.exe.config
+C:\C#(Visual Studid)\C#(GitHub)\SDS\CardGame\SDS\bin\Debug\SDS.exe
+C:\C#(Visual Studid)\C#(GitHub)\SDS\CardGame\SDS\bin\Debug\SDS.pdb
+C:\C#(Visual Studid)\C#(GitHub)\SDS\CardGame\SDS\obj\Debug\SDS.csproj.AssemblyReference.cache
+C:\C#(Visual Studid)\C#(GitHub)\SDS\CardGame\SDS\obj\Debug\SDS.csproj.CoreCompileInputs.cache
+C:\C#(Visual Studid)\C#(GitHub)\SDS\CardGame\SDS\obj\Debug\SDS.exe
+C:\C#(Visual Studid)\C#(GitHub)\SDS\CardGame\SDS\obj\Debug\SDS.pdb
