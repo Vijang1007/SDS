@@ -11,19 +11,23 @@ namespace SDS
     {
         static void Main()
         {
+            
             Map FirstMap = new Map();
-            FirstMap.CreateMap();
+            FirstMap.DisplayMap();
 
             Character MainCharcter = new Character();
             MainCharcter.init(40, 3);
 
             List<Card> Cards = new List<Card>() { new Card(),};
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 5; i++)
             {
-                //Cards[i] = new Card();
-                Cards[i].init(1, 5, 0, 0);
-                Cards.Add(Cards[i]);   
-            } 
+                Cards[i].init("공격", 1, 5, 0, 0);
+                Cards.Add(Cards[i]);
+                Cards[i].DisplayCard(i * 14 + 6, 20, i);
+            }
+
+            SetCursorPosition(0, 0);
+
             ReadKey();
         }
     }
@@ -48,13 +52,15 @@ namespace SDS
 
     public class Card : Character
     {
+        public string Name;
         public int Cost;
         public int Damage;
         public int inPower;
         public int inDefence;
 
-        public void init(int cost, int damage, int powerup, int defenceup)
+        public void init(string name, int cost, int damage, int powerup, int defenceup)
         {
+            Name = name;
             Cost = cost;
             Damage = damage;
             inPower = powerup;
@@ -77,40 +83,67 @@ namespace SDS
         {
             A.Attacked(this.Damage + this.Power - A.Defence);
         }
+
+        public void DisplayCard(int x, int y, int i)
+        {
+            SetCursorPosition(x, y);
+            WriteLine(" ---------- ");
+            SetCursorPosition(x, y + 1);
+            WriteLine($"|        {Cost} |");
+            SetCursorPosition(x, y + 2);
+            WriteLine("|          |");
+            SetCursorPosition(x, y + 3);
+            WriteLine("|          |");
+            SetCursorPosition(x, y + 4);
+            WriteLine("|          |");
+            SetCursorPosition(x, y + 5);
+            WriteLine("|          |");
+            SetCursorPosition(x, y + 6);
+            WriteLine("|          |");
+            SetCursorPosition(x, y + 7);
+            WriteLine(" ----------");
+            SetCursorPosition(x, y + 8);
+            WriteLine($"     [{i + 1}]     ");
+        }
     }
 
     public class Map
     {
         public char[] map = new char[5] { '♥', '●', '♨', '♠', '★' };
 
-        public void CreateMap()
+        public void DisplayMap()
         {
-            Write($@"
-        지도
-
-
-         {map[0]}
-       ↙  ↘
-     {map[1]}      {map[1]}
-   ↙  ↘      ↘
- {map[1]}      {map[3]}      {map[3]}
-   ↘    ↓    ↙
-     ↘  ↓  ↙
-       ↘↓↙
-         {map[2]}
-       ↙  ↘
-     {map[1]}      {map[3]}
-     ↓        ↘
-     {map[1]}          {map[1]}
-   ↙  ↘        ↓
- {map[1]}      {map[3]}      {map[2]}
-   ↘    ↓      ↓
-     ↘  ↓      ↓
-       ↘↓      {map[1]}
-         {map[2]}    ↙
-         ↓  ↙
-         ↓↙
-         {map[4]}");
+            SetCursorPosition(80, 0);
+            Write($@"|             지도        
+                                                                                |                         ♥ = Me
+                                                                                |                         ● = Field
+                                                                                |                         ♨ = SafeZone
+                                                                                |                         ♠ = SemiBoss
+                                                                                |              {map[0]}         ★ = Boss
+                                                                                |            ↙  ↘
+                                                                                |          {map[1]}      {map[1]}
+                                                                                |        ↙  ↘      ↘
+                                                                                |      {map[1]}      {map[3]}      {map[3]}
+                                                                                |        ↘    ↓    ↙
+                                                                                |          ↘  ↓  ↙
+                                                                                |            ↘↓↙
+                                                                                |              {map[2]}
+                                                                                |            ↙  ↘
+                                                                                |          {map[1]}      {map[3]}
+                                                                                |          ↓        ↘
+                                                                                |          {map[1]}          {map[1]}
+                                                                                |        ↙  ↘        ↓
+                                                                                |      {map[1]}      {map[3]}      {map[2]}
+                                                                                |        ↘    ↓      ↓
+                                                                                |          ↘  ↓      ↓
+                                                                                |            ↘↓      {map[1]}
+                                                                                |              {map[2]}    ↙
+                                                                                |              ↓  ↙
+                                                                                |              ↓↙
+                                                                                |              {map[4]}
+                                                                                |
+                                                                                |
+                                                                                |");
         }
     }
 }
