@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace SDS
 {
@@ -32,21 +33,21 @@ namespace SDS
             Enemy.DisplayEnemy();
             //나타내기
 
-            //기본적인 카드를 생성
+            //초기 카드를 생성
             List<Card> Cards = new List<Card>() { new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), };
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Cards[i].init("공격", 1, 5, 0, 0);
                 Cards.Add(Cards[i]);
             }
-            for (int i = 0; i < 5; i++)
-            {
-                int x = rand.Next(10);
-                Cards[x].init("방어", 2, 0, 0, 5);
-                Cards.Add(Cards[x]);
+            for (int i = 5; i < 10; i++)
+            {     
+                Cards[i].init("방어", 2, 0, 0, 5);
+                Cards.Add(Cards[i]);
             }
 
-
+            //기본적인 세팅 후 게임 시작
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             while (true)
             {
                 SetCursorPosition(70, 1);
@@ -56,11 +57,14 @@ namespace SDS
                 //생성한 카드중 5개의 카드를 화면에 랜덤하게 나타냄
                 for (int i = 0; i < 5; i++)
                 {
-                    Cards[i].DisplayCard(i * 14 + 6, 20, i);
+                    int x = rand.Next(10);
+                    Cards[x].DisplayCard(i * 14 + 6, 20, i);
                 }
 
                 //커서를 생성
                 MovingCursor(11, 19, 11, 54, 0, 0, 14, true, '▼');
+
+                Thread.Sleep(500);
 
                 turn++;
 
@@ -68,9 +72,8 @@ namespace SDS
         }
 
         //메서드
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //커서생성
-        static void MovingCursor(int x, int y, int xFirst, int xMax, int yFirst, int yMax, int range, bool direction, char Arrow)
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static void MovingCursor(int x, int y, int xFirst, int xMax, int yFirst, int yMax, int range, bool direction, char Arrow)//커서생성
         {
             SetCursorPosition(x, y);
             Write($"{Arrow}");
