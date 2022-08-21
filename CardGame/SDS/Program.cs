@@ -12,7 +12,6 @@ namespace SDS
     {
         static void Main()
         {
-            int turn = 1;
 
             CursorVisible = false;
             Random rand = new Random();
@@ -50,10 +49,6 @@ namespace SDS
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             while (true)
             {
-                SetCursorPosition(70, 1);
-                Write($"Turn : {turn}");
-
-
                 //생성한 카드중 5개의 카드를 화면에 랜덤하게 나타냄
                 for (int i = 0; i < 5; i++)
                 {
@@ -65,8 +60,6 @@ namespace SDS
                 MovingCursor(11, 19, 11, 54, 0, 0, 14, true, '▼');
 
                 Thread.Sleep(500);
-
-                turn++;
 
             }
         }
