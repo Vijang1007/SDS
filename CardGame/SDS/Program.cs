@@ -11,11 +11,13 @@ namespace SDS
     {
         static void Main()
         {
+            int turn = 1;
+
             CursorVisible = false;
             Random rand = new Random();
 
             Map FirstMap = new Map();
-            FirstMap.DisplayMap();
+            FirstMap.CreateMap();
             //게임의 진행을 위한 맵생성 후 화면에 표시
 
             Character MainCharcter = new Character();
@@ -45,85 +47,122 @@ namespace SDS
             }
 
 
-            //생성한 카드중 5개의 카드를 화면에 랜덤하게 나타냄
-            for (int i = 0; i < 5; i++)
+            while (true)
             {
-                Cards[i].DisplayCard(i * 14 + 6, 20, i);
+                SetCursorPosition(70, 1);
+                Write($"Turn : {turn}");
+
+
+                //생성한 카드중 5개의 카드를 화면에 랜덤하게 나타냄
+                for (int i = 0; i < 5; i++)
+                {
+                    Cards[i].DisplayCard(i * 14 + 6, 20, i);
+                }
+
+                //커서를 생성
+                MovingCursor(11, 19, 11, 54, 0, 0, 14, true, '▼');
+
+                turn++;
+
             }
-
-            SelectKey(Cards[1], Enemy);
-
-            SetCursorPosition(0, 0);
-
-            ReadKey();
         }
-
 
         //메서드
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //커서생성(미완성)
-        static void MovingCursor(int x, int y, int xrange, int yrange, int move, int direction)
+        //커서생성
+        static void MovingCursor(int x, int y, int xFirst, int xMax, int yFirst, int yMax, int range, bool direction, char Arrow)
         {
             SetCursorPosition(x, y);
-            Write(">");
+            Write($"{Arrow}");
             ConsoleKeyInfo key;
             while (true)
             {
                 key = ReadKey(true);
-                if (direction == 0)
+                if (direction == false)
                 {
                     switch (key.Key)
                     {
                         case ConsoleKey.UpArrow:
-                            SetCursorPosition(x, y);
-                            Write(" ");
-                            SetCursorPosition(x, y - move);
-                            Write(">");
-                            y -= move;
+                            while (y > yFirst)
+                            {
+                                SetCursorPosition(x, y);
+                                Write("  ");
+                                SetCursorPosition(x, y - range);
+                                Write($"{Arrow}");
+                                y -= range;
+                                break;
+                            }
                             break;
 
                         case ConsoleKey.DownArrow:
-                            SetCursorPosition(x, y);
-                            Write(" ");
-                            SetCursorPosition(x, y + move);
-                            Write(">");
-                            y += move;
+                            while (y < yMax)
+                            {
+                                SetCursorPosition(x, y);
+                                Write("  ");
+                                SetCursorPosition(x, y + range);
+                                Write($"{Arrow}");
+                                y += range;
+                                break;
+                            }
                             break;
 
                         case ConsoleKey.Enter:
+
                             break;
                     }
                 }
-                else if (direction == 1)
+                else
                 {
                     switch (key.Key)
                     {
                         case ConsoleKey.LeftArrow:
-                            while (x > x - xrange)
+                            while (x > xFirst)
                             {
                                 SetCursorPosition(x, y);
-                                Write(" ");
-                                SetCursorPosition(x - move, y);
-                                Write(">");
+                                Write("  ");
+                                SetCursorPosition(x - range, y);
+                                Write($"{Arrow}");
+                                x -= range;
                                 break;
-                                x -= move;
                             }
                             break;
 
                         case ConsoleKey.RightArrow:
-                            while (x < x + xrange)
+                            while (x < xMax)
                             {
                                 SetCursorPosition(x, y);
-                                Write(" ");
-                                SetCursorPosition(x + move, y);
-                                Write(">");
-                                x += move;
+                                Write("  ");
+                                SetCursorPosition(x + range, y);
+                                Write($"{Arrow}");
+                                x += range;
                                 break;
                             }
                             break;
 
                         case ConsoleKey.Enter:
-                            break;
+                            SetCursorPosition(x, y);
+                            Write("  ");
+                            if (x == 11)
+                            {
+
+                            }
+                            else if (x == 25)
+                            {
+
+                            }
+                            else if (x == 39)
+                            {
+
+                            }
+                            else if (x == 53)
+                            {
+
+                            }
+                            else if (x == 67)
+                            {
+
+                            }
+                            return;
                     }
                 }
 
@@ -140,23 +179,23 @@ namespace SDS
                 {
                     case ConsoleKey.D1:
 
-                        A.Do(A);
+                        A.Do(b);
                         break;
 
                     case ConsoleKey.D2:
-                        A.Do(A);
+                        A.Do(b);
                         break;
 
                     case ConsoleKey.D3:
-                        A.Do(A);
+                        A.Do(b);
                         break;
 
                     case ConsoleKey.D4:
-                        A.Do(A);
+                        A.Do(b);
                         break;
 
                     case ConsoleKey.D5:
-                        A.Do(A);
+                        A.Do(b);
                         break;
 
                     default:
@@ -170,7 +209,7 @@ namespace SDS
 }
 
 //클래스
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public class Character//캐릭터의 클래스 생성
 {
     public int Hp;
@@ -196,7 +235,7 @@ public class Character//캐릭터의 클래스 생성
         SetCursorPosition(14, 7);
         Write("MainCharacter");
         SetCursorPosition(8, 15);
-        Write($"HP:{Hp} Power:{Power} Defence:{Defence}");
+        Write($"HP:{Hp} Defence:{Defence} Power:{Power}");
     }
     public void DisplayEnemy()
     {
@@ -270,46 +309,49 @@ public class Card : Character//카드의 효과들은 캐릭터가 받으므로 
         WriteLine($"|A:{Damage}    D:{inDefence}|");
         SetCursorPosition(x, y + 7);
         WriteLine(" ----------");
-        SetCursorPosition(x, y + 8);
-        WriteLine($"     [{i + 1}]     ");
     }
 }
 
 public class Map //맵
 {
-    public char[] map = new char[5] { '♥', '●', '♨', '♠', '★' };
+    public char[] map = new char[6] { '♥', '●', '♠', '♨', '★', '○' };
 
-    public void DisplayMap()
+    public void CreateMap()
     {
-        //랜덤한 수를 넣어서 맵을 랜덤하게 생성해야함
+        //플레이할때마다 랜덤한 맵을 만들기 위해 랜덤으로 생성
         Random rand = new Random();
-        int x = rand.Next(2) + 1;
+        int[] nmap = new int[11];
+        for (int i = 0; i < 11; i++)
+        {
+            nmap[i] = rand.Next(2) + 1;
+        }
 
+        //맵을 화면에 표시
         SetCursorPosition(80, 0);
         Write($@"|             지도        
                                                                                 |                         ♥ = Me
                                                                                 |                         ● = Field
-                                                                                |                         ♨ = SafeZone
                                                                                 |                         ♠ = SemiBoss
+                                                                                |                         ♨ = SafeZone
                                                                                 |              {map[0]}         ★ = Boss
                                                                                 |            ↙  ↘
-                                                                                |          {map[1]}      {map[1]}
+                                                                                |          {map[nmap[0]]}      {map[nmap[1]]}
                                                                                 |        ↙  ↘      ↘
-                                                                                |      {map[1]}      {map[3]}      {map[3]}
+                                                                                |      {map[nmap[2]]}      {map[nmap[3]]}      {map[nmap[4]]}
                                                                                 |        ↘    ↓    ↙
                                                                                 |          ↘  ↓  ↙
                                                                                 |            ↘↓↙
-                                                                                |              {map[2]}
+                                                                                |              {map[3]}
                                                                                 |            ↙  ↘
-                                                                                |          {map[1]}      {map[3]}
+                                                                                |          {map[nmap[5]]}      {map[nmap[6]]}
                                                                                 |          ↓        ↘
-                                                                                |          {map[1]}          {map[1]}
+                                                                                |          {map[3]}          {map[nmap[7]]}
                                                                                 |        ↙  ↘        ↓
-                                                                                |      {map[1]}      {map[3]}      {map[2]}
+                                                                                |      {map[nmap[8]]}      {map[nmap[9]]}      {map[3]}
                                                                                 |        ↘    ↓      ↓
                                                                                 |          ↘  ↓      ↓
-                                                                                |            ↘↓      {map[1]}
-                                                                                |              {map[2]}    ↙
+                                                                                |            ↘↓      {map[nmap[10]]}
+                                                                                |              {map[3]}    ↙
                                                                                 |              ↓  ↙
                                                                                 |              ↓↙
                                                                                 |              {map[4]}
