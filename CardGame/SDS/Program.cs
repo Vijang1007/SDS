@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
+
 namespace SDS
 {
     class Program
@@ -36,12 +37,12 @@ namespace SDS
             List<Card> Cards = new List<Card>() { new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), new Card(), };
             for (int i = 0; i < 5; i++)
             {
-                Cards[i].init("공격", 1, 5, 0, 0);
+                Cards[i].init("공 격", 1, 5, 0, 0);
                 Cards.Add(Cards[i]);
             }
             for (int i = 5; i < 10; i++)
             {     
-                Cards[i].init("방어", 2, 0, 0, 5);
+                Cards[i].init("방 어", 2, 0, 0, 5);
                 Cards.Add(Cards[i]);
             }
 
@@ -186,7 +187,7 @@ namespace SDS
 }
 
 //클래스
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public class Character//캐릭터의 클래스 생성
 {
     public int Hp;
@@ -271,21 +272,21 @@ public class Card : Character//카드의 효과들은 캐릭터가 받으므로 
     public void DisplayCard(int x, int y, int i)//카드의 모양 표시
     {
         SetCursorPosition(x, y);
-        WriteLine(" ---------- ");
+        WriteLine("┌ㅡㅡㅡㅡㅡ┐");
         SetCursorPosition(x, y + 1);
-        WriteLine($"|        {Cost} |");
+        WriteLine($"│        {Cost} │");
         SetCursorPosition(x, y + 2);
-        WriteLine("|          |");
+        WriteLine("│          │");
         SetCursorPosition(x, y + 3);
-        WriteLine($"|   {Name}   |");
+        WriteLine($"│   {Name}  │");
         SetCursorPosition(x, y + 4);
-        WriteLine("|          |");
+        WriteLine("│          │");
         SetCursorPosition(x, y + 5);
-        WriteLine("|          |");
+        WriteLine("│          │");
         SetCursorPosition(x, y + 6);
-        WriteLine($"|A:{Damage}    D:{inDefence}|");
+        WriteLine($"│ A:{Damage}   D:{inDefence}│");
         SetCursorPosition(x, y + 7);
-        WriteLine(" ----------");
+        WriteLine("└ㅡㅡㅡㅡㅡ┘");
     }
 }
 
@@ -305,36 +306,36 @@ public class Map //맵
 
         //맵을 화면에 표시
         SetCursorPosition(80, 0);
-        Write($@"|             지도        
-                                                                                |                         ♥ = Me
-                                                                                |                         ● = Field
-                                                                                |                         ♠ = SemiBoss
-                                                                                |                         ♨ = SafeZone
-                                                                                |              {map[0]}         ★ = Boss
-                                                                                |            ↙  ↘
-                                                                                |          {map[nmap[0]]}      {map[nmap[1]]}
-                                                                                |        ↙  ↘      ↘
-                                                                                |      {map[nmap[2]]}      {map[nmap[3]]}      {map[nmap[4]]}
-                                                                                |        ↘    ↓    ↙
-                                                                                |          ↘  ↓  ↙
-                                                                                |            ↘↓↙
-                                                                                |              {map[3]}
-                                                                                |            ↙  ↘
-                                                                                |          {map[nmap[5]]}      {map[nmap[6]]}
-                                                                                |          ↓        ↘
-                                                                                |          {map[3]}          {map[nmap[7]]}
-                                                                                |        ↙  ↘        ↓
-                                                                                |      {map[nmap[8]]}      {map[nmap[9]]}      {map[3]}
-                                                                                |        ↘    ↓      ↓
-                                                                                |          ↘  ↓      ↓
-                                                                                |            ↘↓      {map[nmap[10]]}
-                                                                                |              {map[3]}    ↙
-                                                                                |              ↓  ↙
-                                                                                |              ↓↙
-                                                                                |              {map[4]}
-                                                                                |
-                                                                                |
-                                                                                |");
+        Write($@"│             지도        
+                                                                                │                         ♥ = Me
+                                                                                │                         ● = Field
+                                                                                │                         ♠ = SemiBoss
+                                                                                │                         ♨ = SafeZone
+                                                                                │              {map[0]}         ★ = Boss
+                                                                                │            ↙  ↘
+                                                                                │          {map[nmap[0]]}      {map[nmap[1]]}
+                                                                                │        ↙  ↘      ↘
+                                                                                │      {map[nmap[2]]}      {map[nmap[3]]}      {map[nmap[4]]}
+                                                                                │        ↘    ↓    ↙
+                                                                                │          ↘  ↓  ↙
+                                                                                │            ↘↓↙
+                                                                                │              {map[3]}
+                                                                                │            ↙  ↘
+                                                                                │          {map[nmap[5]]}      {map[nmap[6]]}
+                                                                                │          ↓        ↘
+                                                                                │          {map[3]}          {map[nmap[7]]}
+                                                                                │        ↙  ↘        ↓
+                                                                                │      {map[nmap[8]]}      {map[nmap[9]]}      {map[3]}
+                                                                                │        ↘    ↓      ↓
+                                                                                │          ↘  ↓      ↓
+                                                                                │            ↘↓      {map[nmap[10]]}
+                                                                                │              {map[3]}    ↙
+                                                                                │              ↓  ↙
+                                                                                │              ↓↙
+                                                                                │              {map[4]}
+                                                                                │
+                                                                                │
+                                                                                │");
     }
 }
 
